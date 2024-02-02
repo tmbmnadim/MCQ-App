@@ -1,21 +1,23 @@
-List<Map<String, dynamic>> resultRepo = [];
+import 'package:engineeringexamgroup/Models/mcq_model.dart';
 
-List<Map<String, dynamic>> getResultRepo() {
+List<MCQModel> resultRepo = [];
+
+List<MCQModel> getResultRepo() {
   return resultRepo;
 }
 
-List<Map<String, dynamic>> getMCQRepo() {
-  return [
+List<MCQModel> getMCQRepo() {
+  List<Map<String, dynamic>> questionsNet = [
     {
       "question": "She insisted on ––– leaving the house.",
-      "answers": ["he", "him", "himself", "his"],
+      "options": ["he", "him", "himself", "his"],
       "category": "ইংরেজি",
       "checkBoxValues": [false, false, false, false],
-      "correctAnswer": 4,
+      "correctAnswer": 4
     },
     {
       "question": "The phrase “Achilles’ heel” means––",
-      "answers": [
+      "options": [
         "a strong point",
         "a strong solution",
         "a weak point",
@@ -23,26 +25,26 @@ List<Map<String, dynamic>> getMCQRepo() {
       ],
       "category": "প্রেশনা",
       "checkBoxValues": [false, false, false, false],
-      "correctAnswer": 3,
+      "correctAnswer": 3
     },
     {
       "question": "He does not adhere ––– any principle.",
-      "answers": ["by", "in", "at", "to"],
+      "options": ["by", "in", "at", "to"],
       "category": "অগ্রগতি",
       "checkBoxValues": [false, false, false, false],
-      "correctAnswer": 4,
+      "correctAnswer": 4
     },
     {
       "question": "Millennium is a period of–––",
-      "answers": ["100 year", "1000 year", "1 million year", "1 million year"],
+      "options": ["100 year", "1000 year", "1 million year", "1 million year"],
       "category": "Programming",
       "checkBoxValues": [false, false, false, false],
-      "correctAnswer": 1,
+      "correctAnswer": 1
     },
     {
       "question":
           "Identify the passive form of the following sentence : Who has broken this jug?",
-      "answers": [
+      "options": [
         "By whom has this jug been broken?",
         "By whom has this jug broken?",
         "By whom this jug has been broken?",
@@ -50,11 +52,11 @@ List<Map<String, dynamic>> getMCQRepo() {
       ],
       "category": "Programming",
       "checkBoxValues": [false, false, false, false],
-      "correctAnswer": 1,
+      "correctAnswer": 1
     },
     {
       "question": "Who is not a Victorian poet?",
-      "answers": [
+      "options": [
         "Alfred Tennyson",
         "Robert Browning",
         "William Wordsworth",
@@ -62,11 +64,11 @@ List<Map<String, dynamic>> getMCQRepo() {
       ],
       "category": "Programming",
       "checkBoxValues": [false, false, false, false],
-      "correctAnswer": 3,
+      "correctAnswer": 3
     },
     {
       "question": "Which of the following novels was written by George Orwell?",
-      "answers": [
+      "options": [
         "1984",
         "Brave New World",
         "A clockwork Orange",
@@ -74,11 +76,11 @@ List<Map<String, dynamic>> getMCQRepo() {
       ],
       "category": "Programming",
       "checkBoxValues": [false, false, false, false],
-      "correctAnswer": 1,
+      "correctAnswer": 1
     },
     {
       "question": "Identify the correct sentence:",
-      "answers": [
+      "options": [
         "She speaks English like English",
         "She speaks the English like English",
         "She speaks the English like the English",
@@ -86,21 +88,26 @@ List<Map<String, dynamic>> getMCQRepo() {
       ],
       "category": "Programming",
       "checkBoxValues": [false, false, false, false],
-      "correctAnswer": 4,
+      "correctAnswer": 4
     },
     {
       "question": "When one makes a promise, one must not go ––– on it.",
-      "answers": ["forward", "back", "by", "around"],
+      "options": ["forward", "back", "by", "around"],
       "category": "Programming",
       "checkBoxValues": [false, false, false, false],
-      "correctAnswer": 3,
+      "correctAnswer": 3
     },
     {
       "question": "I can't put up with him any more. Here put up with' means :",
-      "answers": ["To protect", "To terminate", "To tolerate", "To prevent"],
+      "options": ["To protect", "To terminate", "To tolerate", "To prevent"],
       "category": "Programming",
       "checkBoxValues": [false, false, false, false],
-      "correctAnswer": 3,
+      "correctAnswer": 3
     }
   ];
+  List<MCQModel> questions = [];
+  for (var question in questionsNet) {
+    questions.add(MCQModel.fromJson(question));
+  }
+  return questions;
 }

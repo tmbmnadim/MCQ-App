@@ -1,29 +1,26 @@
 import 'dart:async';
 
 import 'package:engineeringexamgroup/Custom%20Widgets/mcq_box.dart';
-import 'package:engineeringexamgroup/Repos/get_mcq_repo.dart';
 import 'package:engineeringexamgroup/State%20Manager/mcq_state.dart';
 import 'package:engineeringexamgroup/Screens/test_result.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
-class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+class ExamPage extends StatefulWidget {
+  const ExamPage({super.key});
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<ExamPage> createState() => _ExamPageState();
 }
 
-class _HomepageState extends State<Homepage> {
-  final MCQState mcqObj = Get.put(MCQState());
-
+class _ExamPageState extends State<ExamPage> {
   late Timer _timer;
   int _start = 20;
 
   @override
   void initState() {
     super.initState();
-    mcqObj.getMCQ();
+    Provider.of<MCQState>(context, listen: false).getMCQ();
     startTimer();
   }
 
@@ -55,10 +52,10 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
-          GetBuilder<MCQState>(
-            builder: (mcq) => Container(
+          Consumer<MCQState>(
+            builder: (context, mcq, _) => Container(
               color: Colors.white,
-              height: screenSize.height * 0.73,
+              height: screenSize.height * 0.75,
               width: screenSize.width,
               child: ListView.builder(
                 itemCount: mcq.mcq.length + 1,
@@ -67,13 +64,16 @@ class _HomepageState extends State<Homepage> {
                     return IgnorePointer(
                       ignoring: (_start == 0),
                       child: MCQBox(
-                        question: mcq.mcq[index]["question"],
-                        answers: mcq.mcq[index]["answers"],
-                        checkBoxValues: mcq.mcq[index]["checkBoxValues"],
+                        question: mcq.mcq[index].question!,
+                        options: mcq.mcq[index].options!,
+                        checkBoxValues: mcq.mcq[index].checkBoxValues,
                         onChanged: (value, index2) {
-                          mcq.mcq[index]["checkBoxValues"].fillRange(0,
-                              mcq.mcq[index]["checkBoxValues"].length, false);
-                          mcq.mcq[index]["checkBoxValues"][index2] = value!;
+                          mcq.mcq[index].checkBoxValues.fillRange(
+                            0,
+                            mcq.mcq[index].checkBoxValues.length,
+                            false,
+                          );
+                          mcq.mcq[index].checkBoxValues[index2] = value!;
                           mcq.updateMCQ();
                         },
                       ),
@@ -90,8 +90,12 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                         onPressed: () {
-                          resultRepo = mcqObj.mcq;
-                          Get.to(ResultPage());
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ResultPage(),
+                            ),
+                          );
                         },
                         child: const Text(
                           "Submit",

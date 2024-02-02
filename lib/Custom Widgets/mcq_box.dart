@@ -5,7 +5,7 @@ class MCQBox extends StatefulWidget {
     super.key,
     required this.checkBoxValues,
     required this.onChanged,
-    required this.answers,
+    required this.options,
     required this.question,
     this.questionPoint,
     this.correctAnswer,
@@ -13,7 +13,7 @@ class MCQBox extends StatefulWidget {
 
   final String question;
   final String? questionPoint;
-  final List<String> answers;
+  final List<String> options;
   final int? correctAnswer;
   final List<bool> checkBoxValues;
   final Function(bool?, int) onChanged;
@@ -74,7 +74,7 @@ class _MCQBoxState extends State<MCQBox> {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     title: Text(
-                      "(${index + 1}) ${widget.answers[index]}",
+                      "(${index + 1}) ${widget.options[index]}",
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,

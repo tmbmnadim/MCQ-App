@@ -1,4 +1,4 @@
-import 'package:engineeringexamgroup/Screens/Homepage.dart';
+import 'package:engineeringexamgroup/Screens/exam_page.dart';
 import 'package:engineeringexamgroup/Screens/test_result.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentPage = 0;
   List<Widget> bottomPages = [
-    Homepage(),
+    ExamPage(),
+    ResultPage(),
     ResultPage(),
     ResultPage(),
   ];
@@ -29,7 +30,7 @@ class _HomeState extends State<Home> {
           //   ),
           //   physics: const NeverScrollableScrollPhysics(),
           //   children: const [
-          //     Homepage(),
+          //      ExamPage(),
           //     ResultPage(),
           //     ResultPage(),
           //   ],
@@ -38,19 +39,33 @@ class _HomeState extends State<Home> {
             bottom: 0,
             left: 0,
             child: SizedBox(
-              height: screenSize.height * 0.1,
+              height: screenSize.height * 0.08,
               width: screenSize.width,
               child: BottomNavigationBar(
+                currentIndex: _currentPage,
+                selectedItemColor: Colors.green,
+                unselectedItemColor: Colors.black54,
                 onTap: (index) {
                   _currentPage = index;
+                  setState(() {});
                 },
                 items: const [
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.home_filled), label: "Home"),
+                    icon: Icon(Icons.edit_document),
+                    label: "Exam",
+                  ),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.edit_document), label: "Result"),
+                    icon: Icon(Icons.markunread_mailbox_outlined),
+                    label: "Result",
+                  ),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.edit_document), label: "Result"),
+                    icon: Icon(Icons.markunread_mailbox_outlined),
+                    label: "Result",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.menu),
+                    label: "Menu",
+                  ),
                 ],
               ),
             ),
